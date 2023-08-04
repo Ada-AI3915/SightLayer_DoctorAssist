@@ -1,0 +1,23 @@
+version: '3'
+services:
+  chatbot-service:
+    build:
+      context: ./chatbot-service
+    ports:
+      - 3002:3002
+    depends_on:
+      - socket-service
+
+  socket-service:
+    build:
+      context: ./socket-service
+    ports:
+      - 3001:3001
+    depends_on:
+      - frontend
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - 3000:3000

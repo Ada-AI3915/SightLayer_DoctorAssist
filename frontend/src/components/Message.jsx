@@ -1,18 +1,9 @@
+import copy from 'copy-to-clipboard';
+
 // component called Message that renders a message bubble with different styles based on the author of the message.
 // it also includes a copy button for messages from the bot.
 // the Message component takes three props: message, author, and myRole.
 export default function Message({ message, author, myRole }) {
-  // function to copy the message to the clipboard
-  const copyToClipboard = (message) => {
-    navigator.clipboard.writeText(message)                             // uses the navigator.clipboard.writeText method to write the message to the clipboard.
-      .then(() => {
-        console.log('Text copied to clipboard');
-      })
-      .catch((error) => {
-        console.error('Error copying text to clipboard:', error);
-      });
-  };
-
   return (
     <div
       className={`flex w-full px-4 py-1 ${
@@ -32,7 +23,7 @@ export default function Message({ message, author, myRole }) {
         }
         {
           // display a copy button for messages from the bot
-          author === 'bot' && <button onClick={() => copyToClipboard(message)} title="Copy to clipboard" className="w-6 h-6 float-right bg-white border border-gray-200 rounded-[50%]">📋</button>
+          author === 'bot' && <button onClick={() => copy(message)} title="Copy to clipboard" className="w-6 h-6 float-right bg-white border border-gray-200 rounded-[50%]">📋</button>
         }
       </p>
     </div>

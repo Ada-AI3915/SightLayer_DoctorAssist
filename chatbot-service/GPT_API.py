@@ -31,7 +31,7 @@ def parse_output(output, content):
         output = output.replace("\"", "")
         drug_data = get_drug_info(output)
         if drug_data == "error":
-            return {"indications_and_usage":""}
+            return {"indications_and_usage": ""}
         else:
             return generate_answer_with_drug_info(content, drug_data)
     # else, output
