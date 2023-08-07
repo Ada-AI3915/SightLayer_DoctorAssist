@@ -51,8 +51,7 @@ Given the conversation between Clinician and Patient, provide the drug names.
 you will generate the answer as following steps:
 
 Step 1: When there are any drugs being discussed in the conversation, please only return those drug names and stop generation.
-Step 2: When you know some drug names that could be propriate for the patient's condition, please only return the expecting drug names and stop generation.
-Step 3: only return None and stop generation.
+Step 2: only return None and stop generation.
 
 You must only return drug name. If there are multiple drugs you are expecting, return all names of them and split by ','.
 

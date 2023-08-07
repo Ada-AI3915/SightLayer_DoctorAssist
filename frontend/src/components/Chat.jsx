@@ -49,7 +49,7 @@ export default function Chat({ role, messages, setMessages }) {
       {/* contains a list of Message components, each representing a message in the chat. */}
       <main
         className="w-full overflow-y-auto items-center justify-center p-4"
-        style={{ height: "calc(100% - 160px)" }}
+        style={{ height: "calc(100% - 120px)" }}
         ref={chatRef}
       >
         {messages.map((msg, i) => (
@@ -63,7 +63,7 @@ export default function Chat({ role, messages, setMessages }) {
       </main>
 
       {/* includes a textarea for typing messages and a button to send the message. */}
-      <footer className="w-full h-24 flex py-2 px-4 items-center justify-center">
+      <footer className="w-full h-14 flex py-2 px-4 items-center justify-center">
         <textarea
           onKeyDown={
             (e) => (e.key === "Enter" && e.ctrlKey ? displayMessage() : null) // attached to the textarea and button to handle sending the message when the Enter key and Ctrl key are pressed, respectively.
@@ -71,12 +71,12 @@ export default function Chat({ role, messages, setMessages }) {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           placeholder="Send Message..."
-          className="w-full h-full p-2 outline-0 ring-blue-500 resize-none rounded-xl border-2 border-gray-600"
+          className="w-full h-12 p-2 outline-0 ring-blue-500 resize-none rounded-xl border-2 border-gray-600"
         />
         &nbsp;&nbsp;
         <button
           onClick={displayMessage}
-          className="w-[120px] h-12 px-4 mt-auto bg-blue-900 text-white rounded-xl border-2 border-gray-600"
+          className="w-[120px] h-12 px-4 bg-blue-900 text-white rounded-xl border-2 border-gray-600"
         >
           Send
         </button>

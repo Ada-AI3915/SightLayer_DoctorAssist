@@ -1,13 +1,21 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import copy from "copy-to-clipboard";
 import { socket } from "../utils/socket";
+import { Icon } from "@iconify/react";
 
 // this component represents the chat interface where clinician can send and receive messages with chatbot.
 // the Chatbot component is defined as a functional component that takes two props: botMessages and setBotMessages.
 export default function Chatbot({ botMessages, setBotMessages }) {
+  const [loading, setLoading] = useState(false);
   // function to display and send a message
   const displayMessage = (categoryId) => {
     socket.emit("bot request", categoryId); // emits a send event using the socket object.
+    const tmpBotMessages = [...botMessages];
+    tmpBotMessages[categoryId]["answer"] = (
+      <Icon icon="line-md:loading-loop" className="text-2xl" />
+    );
+    setBotMessages(tmpBotMessages);
+    setLoading(true);
   };
 
   // function to receive a new message
@@ -18,6 +26,7 @@ export default function Chatbot({ botMessages, setBotMessages }) {
         const tmpBotMessages = [...botMessages];
         tmpBotMessages[categoryId]["answer"] = answer;
         setBotMessages(tmpBotMessages);
+        setLoading(false);
       } else {
         setBotMessages(botChatHistory);
       }
@@ -42,7 +51,7 @@ export default function Chatbot({ botMessages, setBotMessages }) {
           <div className="mt-2 mb-4 p-4 bg-gray-100 rounded-xl border-2 border-gray-600">
             {/* display a copy button for messages from the bot */}
             {category["answer"] ? category["answer"] : "Not applicable"}
-            {category["answer"] && (
+            {category["answer"] && loading !== true && (
               <button
                 onClick={() => copy(category["answer"])}
                 title="Copy to clipboard"
