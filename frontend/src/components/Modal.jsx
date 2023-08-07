@@ -11,12 +11,14 @@ export default function Modal({
     <div
       className={
         modalStatus
-          ? `h-full w-full absolute flex items-center justify-center bg-white bg-opacity-0 backdrop-blur-sm transition-all`
+          ? `h-full w-full absolute flex items-center justify-center pb-60`
           : "hidden"
       }
     >
-      <div className="h-62 w-[382px] p-8 flex items-center flex-col bg-white gap-2 transition-all">
-        <h1 className="font-bold text-[32px] text-blue-600">{title}</h1>
+      <div className="h-62 w-[382px] p-8 flex items-center flex-col bg-gray-200 rounded-[32px] border-2 border-gray-600">
+        <header className="h-16 w-[80%] flex items-center justify-center border-b-2 border-b-gray-600">
+          <h1 className="text-[32px] text-black">{title}</h1>
+        </header>
         <div className="relative w-full flex items-center h-20">
           {/* represents the radio button for the clinician role. */}
           <div className="w-[50%]">
@@ -51,7 +53,7 @@ export default function Modal({
             onClick={() => {
               if (role !== "") setModalStatus(false);
             }}
-            className="w-[100%] h-10 bg-blue-600 text-white text-xl"
+            className="w-full h-12 px-4 mt-auto bg-blue-900 text-white rounded-xl border-2 border-gray-600"
           >
             Connect
           </button>
