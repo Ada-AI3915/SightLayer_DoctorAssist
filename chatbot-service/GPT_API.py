@@ -70,13 +70,14 @@ Given the conversation between Clinician and Patient, provide all of the standar
 
 Your response sentence must follow the following rules:
 1. Consider yourself as the Clinician.
-2. Provide the drug facts kindly.
-4. Must start with "Clinician: ".
-
-{sample_conversations}
+2. Provide the detailed facts of following all drugs (dosage, side effects, warnings etc).
+3. Must start with "Clinician: ".
+4. Keep it short. Aim for less than 180 words in your Upwork proposal. 120-160 words is ideal.
+5. Use the active voice. The active voice is stronger and more engaging than the passive voice.
+6. Use specific language. Avoid vague language that can be interpreted in multiple ways.
+7. Proofread your response sentence carefully. Typos and grammatical errors will make you look unprofessional.
 
 """
-
 
 # prompt to Categorize topic
 CT_system_msg = """
@@ -119,13 +120,13 @@ Negative
 # get the drug info from OpenFDA
 def get_drug_info(drug_name):
     url = f"https://api.fda.gov/drug/label.json?search=openfda.generic_name:{drug_name}&limit=1"
-    response = requests.get(url)
-    data = json.loads(response.text)
+    response = requests.get(url).text
 
-    if 'error' in data:
+    if 'error' in response or 'Error' in response:
         return "error"
     else:
         # Extract and print some drug information
+        data = json.loads(response)
         return data['results'][0]
 
 
@@ -150,7 +151,7 @@ def generate_answer_with_drug_info(humanmessage):
         for dn in drug_names[:3]:
             print("asking... ", dn)
             response = get_drug_info(dn)
-            if response != 'error':
+            if response == 'error':
                 drug_infos.append(dn)
             else:
                 drug_infos.append(response)
@@ -165,6 +166,7 @@ Here are previous conversation:
 Here are drug information:
 {drug_infos}
 """
+        
         # get the drug info
         response = openai.ChatCompletion.create(model="gpt-3.5-turbo-16k",
                                             messages=[{"role": "system", "content": message}])
@@ -236,3 +238,5 @@ def get_GPTRespond(chat_history, question):
     # # get the final respond
     # responsemessage = parse_output(output, humanmessage)
     return output
+
+# print(get_drug_info("Ibuprofen Dye Free"))
