@@ -49,7 +49,7 @@ export default function Chat({ role, messages, setMessages }) {
       {/* contains a list of Message components, each representing a message in the chat. */}
       <main
         className="w-full overflow-y-auto items-center justify-center p-4"
-        style={{ height: "calc(100% - 120px)" }}
+        style={{ height: "calc(100% - 144px)" }}
         ref={chatRef}
       >
         {messages.map((msg, i) => (
@@ -63,7 +63,7 @@ export default function Chat({ role, messages, setMessages }) {
       </main>
 
       {/* includes a textarea for typing messages and a button to send the message. */}
-      <footer className="w-full h-14 flex py-2 px-4 items-center justify-center">
+      <footer className="w-full h-20 flex py-2 px-4 items-center justify-center">
         <textarea
           onKeyDown={
             (e) => (e.key === "Enter" && e.ctrlKey ? displayMessage() : null) // attached to the textarea and button to handle sending the message when the Enter key and Ctrl key are pressed, respectively.
