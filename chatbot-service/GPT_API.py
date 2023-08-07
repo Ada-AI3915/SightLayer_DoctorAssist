@@ -141,7 +141,7 @@ def generate_answer_with_drug_info(humanmessage):
     drug_infos = []                                         # Inintialize the drug information list
     # if GPT can't get the specific drug name, return.
     if output == "None":
-        return "I can't figure out the specific drug names."
+        return "No drug names detected in conversation."
     # else, provide the drug information
     else:
         drug_names = output.split(",")
