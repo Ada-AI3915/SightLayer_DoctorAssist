@@ -11,7 +11,7 @@ app = Flask(__name__)
 # default url response
 @app.route('/')
 def index():
-    return {'info': 'Doctor Assist Chatbot API'}
+    return {'info': 'SightLayer Chatbot API'}
 
 
 # chatbot respond
@@ -19,9 +19,13 @@ def index():
 def post_respond():
     data = request.get_json()                # Get the posted data
     chatHistory = data["history"]            # Get the conversation chatHistory
-    gptAnswer = get_GPTRespond(chatHistory)  # Get the respond of GPT API
-    respond = {"botMessage": gptAnswer}
-    return respond, 200
+    question = data["question"]              # Get the conversation question
+    if chatHistory != []:
+        gptAnswer = get_GPTRespond(chatHistory, question)  # Get the respond of GPT API
+        respond = {"botMessage": gptAnswer}
+        return respond, 200
+    else:
+        return "Not applicable", 200
 
 
 if __name__ == '__main__':
