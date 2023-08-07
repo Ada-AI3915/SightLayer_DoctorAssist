@@ -175,8 +175,6 @@ Here are drug information:
 
         return output
 
-
-
 # response without considering drug info
 def get_information(question, humanmessage):
     systemmessage = DQ_system_msg
@@ -231,12 +229,10 @@ def make_humanmessage(chat_history):
 def get_GPTRespond(chat_history, question):
     # make the human message and last author
     humanmessage = make_humanmessage(chat_history)
-    # get the first respond
     
+    # get the drug info
     output = get_information(question, humanmessage)
-    # print(output)
-    # # get the final respond
-    # responsemessage = parse_output(output, humanmessage)
+
     return output
 
 # print(get_drug_info("Ibuprofen Dye Free"))
