@@ -71,7 +71,7 @@ Your response sentence must follow the following rules:
 1. Consider yourself as the Clinician.
 2. Provide the detailed facts of following all drugs (dosage, side effects, warnings etc).
 3. Must start with "Clinician: ".
-4. Keep it short. Aim for less than 180 words in your Upwork proposal. 120-160 words is ideal.
+4. Keep it short. Aim for less than 180 words. 120-160 words is ideal.
 5. Use the active voice. The active voice is stronger and more engaging than the passive voice.
 6. Use specific language. Avoid vague language that can be interpreted in multiple ways.
 7. Proofread your response sentence carefully. Typos and grammatical errors will make you look unprofessional.
