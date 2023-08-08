@@ -97,7 +97,7 @@ Book an appointment, Discovery questions
 ==========
 """
 
-# prompt to Assess patient sentiment
+# prompt to assess patient sentiment
 APS_system_msg = """
 Given the conversation between Clinician and Patient, Assess the the patient sentiment.
 Based off of the previous response in the conversation, determine the current sentiment of the patient.
