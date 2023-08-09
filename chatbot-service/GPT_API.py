@@ -142,7 +142,6 @@ def book_appointment(humanmessage):
                                             messages=[{"role": "system", "content": BA_system_msg},
                                                       {"role": "user", "content": humanmessage}])
     output = response["choices"][0]["message"]["content"].replace("Clinician: ", "")
-    print(output)
 
     # if there is calendar link
     response = openai.ChatCompletion.create(model="gpt-3.5-turbo-16k",
