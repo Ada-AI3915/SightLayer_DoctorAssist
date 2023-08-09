@@ -71,12 +71,12 @@ export default function Chat({ role, messages, setMessages }) {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           placeholder="Send Message..."
-          className="w-full h-12 p-2 outline-0 ring-blue-500 resize-none rounded-xl border-2 border-gray-600"
+          className="w-full h-12 p-2 outline-0 ring-green-500 resize-none rounded-xl border-2 border-gray-600"
         />
         &nbsp;&nbsp;
         <button
           onClick={displayMessage}
-          className="w-[120px] h-12 px-4 bg-blue-900 text-white rounded-xl border-2 border-gray-600"
+          className="w-[120px] h-12 px-4 bg-green-900 text-white rounded-xl border-2 border-gray-600"
         >
           Send
         </button>
