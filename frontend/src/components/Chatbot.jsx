@@ -44,7 +44,7 @@ export default function Chatbot({ botMessages, setBotMessages }) {
         <div key={categoryId}>
           <button
             onClick={() => displayMessage(categoryId)}
-            className="w-full h-12 px-4 bg-green-900 text-left text-white rounded-xl border-2 border-gray-600"
+            className="w-full h-12 px-4 bg-blue-900 text-left text-white rounded-xl border-2 border-gray-600"
           >
             {category["question"]}
           </button>

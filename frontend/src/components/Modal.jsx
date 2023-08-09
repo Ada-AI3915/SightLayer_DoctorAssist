@@ -53,7 +53,7 @@ export default function Modal({
             onClick={() => {
               if (role !== "") setModalStatus(false);
             }}
-            className="w-full h-12 px-4 mt-auto bg-green-900 text-white rounded-xl border-2 border-gray-600"
+            className="w-full h-12 px-4 mt-auto bg-blue-900 text-white rounded-xl border-2 border-gray-600"
           >
             Connect
           </button>

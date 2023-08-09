@@ -15,7 +15,7 @@ export default function Message({ message, author, myRole }) {
       <p
         className={`px-4 py-2 max-w-[80%] rounded-xl ${
           author === myRole || author === "me"
-            ? "bg-green-700 text-white after:border-green-600"
+            ? "bg-blue-700 text-white after:border-blue-600"
             : "bg-gray-400 text-black"
         }`}
       >
@@ -31,7 +31,7 @@ export default function Message({ message, author, myRole }) {
       </p>
       {author === myRole && (
         <div className="mt-auto flex h-full">
-          <div className="w-0 h-0 border-transparent border-b-green-700 border-b-[16px] border-r-[8px] mb-[10px]" />
+          <div className="w-0 h-0 border-transparent border-b-blue-700 border-b-[16px] border-r-[8px] mb-[10px]" />
         </div>
       )}
     </div>
