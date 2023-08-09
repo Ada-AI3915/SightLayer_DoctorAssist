@@ -44,6 +44,13 @@ Here is a link for you to schedule an appointment. https://calendly.com/workarto
 Here is a scheduling link. https://calendly.com/workartow2
 """
 
+# prompt to check the 'book an appointment' response
+BAC_system_msg = f"""
+Given the message, find out if there is a calendar link, or not.
+
+If there is output 'True', else output 'False'
+"""
+
 # prompt to know the drug name
 PDN_system_msg = """
 Given the conversation between Clinician and Patient, provide the drug names.
@@ -128,6 +135,27 @@ def get_drug_info(drug_name):
         data = json.loads(response)
         return data['results'][0]
 
+# response with an appointment
+def book_appointment(humanmessage):
+    # get the result for the conversation.
+    response = openai.ChatCompletion.create(model="gpt-3.5-turbo-16k",
+                                            messages=[{"role": "system", "content": BA_system_msg},
+                                                      {"role": "user", "content": humanmessage}])
+    output = response["choices"][0]["message"]["content"].replace("Clinician: ", "")
+    print(output)
+
+    # if there is calendar link
+    response = openai.ChatCompletion.create(model="gpt-3.5-turbo-16k",
+                                            messages=[{"role": "system", "content": BAC_system_msg},
+                                                      {"role": "user", "content": output}])
+
+    iscalendarlink = response["choices"][0]["message"]["content"].replace("Clinician: ", "")
+
+    if iscalendarlink == 'True':
+        return output
+    else:
+        return "Here is a scheduling link. https://calendly.com/workartow2"
+
 
 # response with the drug info
 def generate_answer_with_drug_info(humanmessage):
@@ -182,7 +210,8 @@ def get_information(question, humanmessage):
     if question == 'Potential response text: "Discovery questions"':
         systemmessage = DQ_system_msg
     elif question == 'Potential response text: "Book an appointment"':
-        systemmessage = BA_system_msg
+        response = book_appointment(humanmessage)
+        return response
     elif question == 'Potential response text: "Provide drug information"':
         response = generate_answer_with_drug_info(humanmessage)                     # if it needs drug info, get it from OpenFDA
         return response
@@ -221,6 +250,9 @@ def make_humanmessage(chat_history):
         else:
             humanmessage += f"\n\n{currentauthor}: {ch['message']}"
             lastauthor = currentauthor
+    # try the limitation: last 5K words
+    words = humanmessage.split(' ')
+    humanmessage = ' '.join(words[-5000:])
     return humanmessage
 
 
@@ -234,4 +266,9 @@ def get_GPTRespond(chat_history, question):
 
     return output
 
+response = openai.ChatCompletion.create(model="gpt-3.5-turbo-16k",
+                                            messages=[{"role": "system", "content": BAC_system_msg},
+                                                      {"role": "user", "content": "humanmessage"}])
+output = response["choices"][0]["message"]["content"].replace("Clinician: ", "")
+print(output)
 # print(get_drug_info("Ibuprofen Dye Free"))
