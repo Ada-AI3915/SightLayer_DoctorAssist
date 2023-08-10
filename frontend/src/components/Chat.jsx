@@ -1,7 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { socket } from "../utils/socket";
 import Message from "./Message";
-import Logo from "../assets/img/logo.jpeg";
 
 // this component represents the chat interface where users can send and receive messages.
 // the Chat component is defined as a functional component that takes three props: role, messages, and setMessages.
@@ -38,7 +37,13 @@ export default function Chat({ role, messages, setMessages }) {
   }, [chatRef, messages]);
 
   return (
-    <section className="relative h-full w-[48%] mx-auto flex items-center justify-center flex-col bg-gray-200 rounded-[32px] border-2 border-gray-600">
+    <section
+      className="w-full flex items-center justify-center flex-col bg-gray-200 rounded-[32px] border-2 border-gray-600"
+      style={{
+        height:
+          role === "clinician" ? "calc(100% - 80px)" : "calc(100% - 20px)",
+      }}
+    >
       {/* a header element that displays the sender of the messages based on the role prop. */}
       <header className="h-16 w-[80%] flex items-center justify-center border-b-2 border-b-gray-600">
         <h1 className="text-[32px] text-black">
@@ -64,9 +69,9 @@ export default function Chat({ role, messages, setMessages }) {
 
       {/* includes a textarea for typing messages and a button to send the message. */}
       <footer className="w-full h-20 flex py-2 px-4 items-center justify-center">
-        <textarea
+        <input
           onKeyDown={
-            (e) => (e.key === "Enter" && e.ctrlKey ? displayMessage() : null) // attached to the textarea and button to handle sending the message when the Enter key and Ctrl key are pressed, respectively.
+            (e) => (e.key === "Enter" ? displayMessage() : null) // attached to the textarea and button to handle sending the message when the Enter key and Ctrl key are pressed, respectively.
           }
           value={message}
           onChange={(e) => setMessage(e.target.value)}

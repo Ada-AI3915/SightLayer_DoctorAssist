@@ -265,9 +265,4 @@ def get_GPTRespond(chat_history, question):
 
     return output
 
-response = openai.ChatCompletion.create(model="gpt-3.5-turbo-16k",
-                                            messages=[{"role": "system", "content": BAC_system_msg},
-                                                      {"role": "user", "content": "humanmessage"}])
-output = response["choices"][0]["message"]["content"].replace("Clinician: ", "")
-print(output)
-# print(get_drug_info("Ibuprofen Dye Free"))
+

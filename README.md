@@ -1,4 +1,4 @@
-# Doctor Assist
+# SightLayer
 
 ## Create env/config files:
 
